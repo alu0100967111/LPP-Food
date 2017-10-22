@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+git_source(:github) { "https://github.com/ULL-ESIT-LPP-1718/tdd-alu010096711" }
 
 # Specify your gem's dependencies in food.gemspec
 gemspec
