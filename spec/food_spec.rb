@@ -1,6 +1,8 @@
 require "spec_helper"
 include FoodGem
 
+DATA_FILENAME = "docs/data.txt"
+
 RSpec.describe FoodGem do
   
   context "Instanciación de clase Food." do
@@ -37,6 +39,22 @@ RSpec.describe FoodGem do
     end
     it "Obtener la cantidad de lípidos del alimento en gramos." do
       expect(food.lipid_quantity).to eq(19.5)
+    end
+  end
+  
+  context "Leer datos por fichero" do
+    it "Llamo a la función read_data con un fichero de texto donde están los datos." do
+      read_data(DATA_FILENAME)
+    end
+    it "Compruebo que la función read_data me devuelve un array de Alimento." do
+      expect(read_data(DATA_FILENAME)).to be_instance_of(Array)
+    end
+    it "Compruebo que la función read_data me devuelva el primer elemento bien leído." do
+      food_array = read_data(DATA_FILENAME)
+      expect(food_array[0].name).to eq("Huevo frito")
+      expect(food_array[0].protein_quantity).to eq(14.1)
+      expect(food_array[0].glucid_quantity).to eq(0.0)
+      expect(food_array[0].lipid_quantity).to eq(19.5)
     end
   end
   
