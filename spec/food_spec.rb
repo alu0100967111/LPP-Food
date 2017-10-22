@@ -23,5 +23,21 @@ RSpec.describe FoodGem do
       expect {Food.new("Huevo frito", ["A", "B"], ["A", "B"], ["A", "B"])}.to raise_error(RuntimeError)
     end
   end
-
+  
+  context "Obtener atributos de un Alimento." do
+    food = Food.new("Huevo frito", [14.1, 4], [0.0, 4], [19.5, 9])
+    it "Obtener el nombre del alimento" do
+      expect(food.name).to eq("Huevo frito")
+    end
+    it "Obtener la cantidad de proteínas del alimento en gramos." do
+      expect(food.protein_quantity).to eq(14.1)
+    end
+    it "Obtener la cantidad de glúcidos del alimento en gramos." do
+      expect(food.glucid_quantity).to eq(0.0)
+    end
+    it "Obtener la cantidad de lípidos del alimento en gramos." do
+      expect(food.lipid_quantity).to eq(19.5)
+    end
+  end
+  
 end
