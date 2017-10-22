@@ -8,7 +8,7 @@ module FoodGem
 
   class Food
       
-    attr_reader :name, :protein_quantity, :glucid_quantity, :lipid_quantity  
+    attr_reader :name, :protein_quantity, :glucid_quantity, :lipid_quantity, :energetic_content
       
     def initialize (name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair)
       raise unless name.is_a? String
@@ -23,8 +23,26 @@ module FoodGem
       @protein_quantity = protein_energy_pair[0]
       @glucid_quantity = glucid_energy_pair[0]
       @lipid_quantity = lipid_energy_pair[0]
-    end
       
+      @pair_macronutrient_energy = {
+          protein_energy_pair[0] => protein_energy_pair[1],
+          glucid_energy_pair[0] => glucid_energy_pair[1],
+          lipid_energy_pair[0] => lipid_energy_pair[1]
+      }
+      
+      @energetic_content = calculate_energetic_content
+    end
+    
+    def calculate_energetic_content
+        energetic_content = 0
+        @pair_macronutrient_energy.each{ |macronutrient, energy| energetic_content += (macronutrient * energy) }
+        return energetic_content
+    end
+    
+    def to_s
+        "#{@name} | Proteínas: #{@protein_quantity} gramos | Glúcidos: #{@glucid_quantity} gramos | Lípidos: #{@lipid_quantity} gramos | " \
+        "Contenido Energético: #{energetic_content} Kcal. |"
+    end
   end
   
   def read_data (data_filename)

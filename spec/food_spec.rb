@@ -42,7 +42,7 @@ RSpec.describe FoodGem do
     end
   end
   
-  context "Leer datos por fichero" do
+  context "Leer datos por fichero." do
     it "Llamo a la función read_data con un fichero de texto donde están los datos." do
       read_data(DATA_FILENAME)
     end
@@ -55,6 +55,16 @@ RSpec.describe FoodGem do
       expect(food_array[0].protein_quantity).to eq(14.1)
       expect(food_array[0].glucid_quantity).to eq(0.0)
       expect(food_array[0].lipid_quantity).to eq(19.5)
+    end
+  end
+  
+  context "Realizar Operaciones en el alimento." do
+    food_array = read_data(DATA_FILENAME)
+    it "Obtener el valor energético del alimento." do
+      expect(food_array[0].energetic_content).to eq(56.4 + 0.0 + 175.5)
+    end
+    it "Mostrar datos del alimento." do
+      expect(food_array[0].to_s).to eq ("Huevo frito | Proteínas: 14.1 gramos | Glúcidos: 0.0 gramos | Lípidos: 19.5 gramos | Contenido Energético: 231.9 Kcal. |")
     end
   end
   
