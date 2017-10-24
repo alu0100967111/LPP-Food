@@ -4,7 +4,7 @@ include FoodGem
 DATA_FILENAME = "docs/data.txt"
 
 RSpec.describe FoodGem do
-  
+
   context "Instanciación de clase Food." do
     it "Crear un objeto Alimento con un nombre y tres pares (macronutriente, contenido energético): Proteínas, glúcidos y lípidos." do
       Food.new("Huevo frito", [14.1, 4], [0.0, 4], [19.5, 9])
@@ -65,6 +65,12 @@ RSpec.describe FoodGem do
     end
     it "Mostrar datos del alimento." do
       expect(food_array[0].to_s).to eq ("Huevo frito | Proteínas: 14.1 gramos | Glúcidos: 0.0 gramos | Lípidos: 19.5 gramos | Contenido Energético: 231.9 Kcal. |")
+    end
+    it "Comparar con array de resultados los valores energéticos del alimento." do
+      result_array = [231.9, 61.2, 69, 142.7, 112.3, 132.8, 74.4, 225.5, 202, 897.2, 479.2, 399.2, 343.4, 314.6, 70.5, 19.8, 31.1, 54.4, 92.2];
+      for i in 0...(result_array.count)
+        expect(food_array[i].energetic_content.round(2)).to eq(result_array[i]) # Redondeamos a 2!
+      end
     end
   end
   

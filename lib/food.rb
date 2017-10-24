@@ -24,11 +24,11 @@ module FoodGem
       @glucid_quantity = glucid_energy_pair[0]
       @lipid_quantity = lipid_energy_pair[0]
       
-      @pair_macronutrient_energy = {
-          protein_energy_pair[0] => protein_energy_pair[1],
-          glucid_energy_pair[0] => glucid_energy_pair[1],
-          lipid_energy_pair[0] => lipid_energy_pair[1]
-      }
+      # Vector de pares, pues hash no permite iguales
+      @pair_macronutrient_energy = []
+      @pair_macronutrient_energy.push([protein_energy_pair[0], protein_energy_pair[1]])
+      @pair_macronutrient_energy.push([glucid_energy_pair[0], glucid_energy_pair[1]])
+      @pair_macronutrient_energy.push([lipid_energy_pair[0], lipid_energy_pair[1]])
       
       @energetic_content = calculate_energetic_content
     end
@@ -41,7 +41,7 @@ module FoodGem
     
     def to_s
         "#{@name} | Proteínas: #{@protein_quantity} gramos | Glúcidos: #{@glucid_quantity} gramos | Lípidos: #{@lipid_quantity} gramos | " \
-        "Contenido Energético: #{energetic_content} Kcal. |"
+        "Contenido Energético: #{@energetic_content} Kcal. |"
     end
   end
   
