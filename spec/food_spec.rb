@@ -106,6 +106,46 @@ RSpec.describe DLLModule do
     end
   end
   
-  
+  context "Instanciación de una Lista Doblemente Enlazada" do
+    before:all do
+      @node_1 = Node.new(3)
+      @node_2 = Node.new(4)
+      @node_3 = Node.new(5)
+      
+      @list = DLL.new(@node_2)
+    end
+    
+    it "Crear una nueva lista vacía" do
+      list = DLL.new()
+    end
+    it "Crear una nueva lista con un sólo nodo" do
+      list = DLL.new(@node_2)
+    end
+    it "Comprobamos que exista cabeza" do
+      expect(@list.head.value).to eq(4)
+    end
+    it "Comprobamos que exista cola" do
+      expect(@list.tail.value).to eq(4)
+    end
+    it "Insertar un nuevo nodo en la lista por el frente" do
+      @list.insert_head(@node_1)
+    end
+    it "Insertar un nuevo nodo en la lista por la cola" do
+      @list.insert_tail(@node_3)
+    end
+    it "Comprobamos que se puedan insertar varios elementos en la lista" do
+      expect(@list.size).to eq(3)
+    end
+    it "Extraer el primer elemento de la lista" do
+      expect(@list.extract_head.value).to eq(3)
+    end
+    it "Extraer último elemento de la lista" do
+      expect(@list.extract_tail.value).to eq(5)
+    end
+    it "Eliminar un elemento con un valor elegido de la lista" do
+      @list.delete(4)
+      expect(@list.size).to eq(0)
+    end
+  end
   
 end
