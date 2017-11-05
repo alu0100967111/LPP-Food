@@ -1,5 +1,7 @@
 require "spec_helper"
+
 include FoodGem
+include DLLModule
 
 DATA_FILENAME = "docs/data.txt"
 
@@ -73,5 +75,37 @@ RSpec.describe FoodGem do
       end
     end
   end
+  
+end
+
+RSpec.describe DLLModule do
+  
+  context "Instanciación de un Nodo" do
+    before:all do
+      @node_2 = Node.new(4)
+      @node_1 = Node.new(3, @node_2)
+      @node_3 = Node.new(5, nil, @node_2)
+    end
+    
+    it "Crear un nuevo nodo con valor 5" do
+      expect(Node.new(5).value).to eq(5)
+    end
+    it "Acceder al elemento siguiente de un nodo" do
+      expect(@node_1.next).to eq(@node_2)
+    end
+    it "Acceder al elemento anterior de un nodo" do
+      expect(@node_3.prev).to eq(@node_2)
+    end
+    it "Modificar el elemento anterior de un nodo" do
+      @node_2.prev = @node_1
+      expect(@node_2.prev.value).to eq(3)
+    end
+    it "Modificar el elemento siguiente de un nodo" do
+      @node_2.next = @node_3
+      expect(@node_2.next.value).to eq(5)
+    end
+  end
+  
+  
   
 end
