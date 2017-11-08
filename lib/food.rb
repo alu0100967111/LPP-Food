@@ -6,7 +6,7 @@ module FoodGem
   GLUCID_ENERGY = 4
   LIPID_ENERGY = 9
 
-  class Food
+  class FoodAbstract
       
     attr_reader :name, :protein_quantity, :glucid_quantity, :lipid_quantity, :energetic_content
       
@@ -40,8 +40,19 @@ module FoodGem
     end
     
     def to_s
-        "#{@name} | Proteínas: #{@protein_quantity} gramos | Glúcidos: #{@glucid_quantity} gramos | Lípidos: #{@lipid_quantity} gramos | " \
+        "Nombre: #{@name} | Proteínas: #{@protein_quantity} gramos | Glúcidos: #{@glucid_quantity} gramos | Lípidos: #{@lipid_quantity} gramos | " \
         "Contenido Energético: #{@energetic_content} Kcal. |"
+    end
+  end
+  
+  class Food < FoodAbstract
+    def initialize(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair, group_name)
+      @group_name = group_name
+      super(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair)
+    end
+    
+    def to_s
+      "Grupo: #{@group_name}| " + super
     end
   end
   
@@ -62,10 +73,19 @@ module FoodGem
       glucid = [data_line[1].to_f, GLUCID_ENERGY]
       lipid = [data_line[2].to_f, LIPID_ENERGY]
       
-      food_array.push(Food.new(name[0..-2], protein, glucid, lipid)) #Quito último espacio a nombre
+      data_line = data_line[3..-1] 
+      
+      group_name = ""
+      while (!data_line[0].nil?) # Si el nombre no cambia al pasar de string afloat es que es un float
+        group_name << data_line[0] << " "
+        data_line = data_line[1..-1] # Quito el primer elemento
+      end
+      
+      food_array.push(Food.new(name[0..-2], protein, glucid, lipid, group_name)) #Quito último espacio a nombre
     }
     
     return food_array
   end
+  
   
 end

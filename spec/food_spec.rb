@@ -9,27 +9,27 @@ RSpec.describe FoodGem do
 
   context "Instanciación de clase Food." do
     it "Crear un objeto Alimento con un nombre y tres pares (macronutriente, contenido energético): Proteínas, glúcidos y lípidos." do
-      Food.new("Huevo frito", [14.1, 4], [0.0, 4], [19.5, 9])
+      Food.new("Huevo frito", [14.1, 4], [0.0, 4], [19.5, 9], "Lacteos")
     end
     it "No permitir que el primer atributo sea no String." do
-      expect {Food.new(5, [14.1, 4], [0.0, 4], [19.5, 9])}.to raise_error(RuntimeError)
+      expect {Food.new(5, [14.1, 4], [0.0, 4], [19.5, 9], "Lacteos")}.to raise_error(RuntimeError)
     end
     it "No permitir que el segundo, tercer y cuarto atributo sea no Array." do
-      expect {Food.new("Huevo frito", 5, 6, 7)}.to raise_error(RuntimeError)
+      expect {Food.new("Huevo frito", 5, 6, 7, "Lacteos")}.to raise_error(RuntimeError)
     end
     it "No permitir que el segundo, tercer y cuarto atributo sean un par vacío." do
-      expect {Food.new("Huevo frito", [], [], [])}.to raise_error(RuntimeError)
+      expect {Food.new("Huevo frito", [], [], [], "Lacteos")}.to raise_error(RuntimeError)
     end
     it "No permitir que el segundo, tercer y cuarto atributo no sean un par." do
-      expect {Food.new("Huevo frito", [5], [6], [7, 8, 5])}.to raise_error(RuntimeError)
+      expect {Food.new("Huevo frito", [5], [6], [7, 8, 5], "Lacteos")}.to raise_error(RuntimeError)
     end
     it "No permitir que el segundo, tercer y cuarto atributo sean un par de no Float||Int." do
-      expect {Food.new("Huevo frito", ["A", "B"], ["A", "B"], ["A", "B"])}.to raise_error(RuntimeError)
+      expect {Food.new("Huevo frito", ["A", "B"], ["A", "B"], ["A", "B"], "Lacteos")}.to raise_error(RuntimeError)
     end
   end
   
   context "Obtener atributos de un Alimento." do
-    food = Food.new("Huevo frito", [14.1, 4], [0.0, 4], [19.5, 9])
+    food = Food.new("Huevo frito", [14.1, 4], [0.0, 4], [19.5, 9], "Lacteos")
     it "Obtener el nombre del alimento" do
       expect(food.name).to eq("Huevo frito")
     end
@@ -66,7 +66,7 @@ RSpec.describe FoodGem do
       expect(food_array[0].energetic_content).to eq(56.4 + 0.0 + 175.5)
     end
     it "Mostrar datos del alimento." do
-      expect(food_array[0].to_s).to eq ("Huevo frito | Proteínas: 14.1 gramos | Glúcidos: 0.0 gramos | Lípidos: 19.5 gramos | Contenido Energético: 231.9 Kcal. |")
+      expect(food_array[0].to_s).to eq ("Grupo: Huevos, lacteos y helado | Nombre: Huevo frito | Proteínas: 14.1 gramos | Glúcidos: 0.0 gramos | Lípidos: 19.5 gramos | Contenido Energético: 231.9 Kcal. |")
     end
     it "Comparar con array de resultados los valores energéticos del alimento." do
       result_array = [231.9, 61.2, 69, 142.7, 112.3, 132.8, 74.4, 225.5, 202, 897.2, 479.2, 399.2, 343.4, 314.6, 70.5, 19.8, 31.1, 54.4, 92.2];

@@ -14,7 +14,9 @@ module DLLModule
       @size = (node.nil?) ? 0 : 1
     end
     
-    def insert_head (node)
+    private
+    
+    def insert_head_private (node)
       if @head.nil?
         @head = node
         @tail = node
@@ -26,7 +28,7 @@ module DLLModule
       @size += 1
     end
     
-    def insert_tail (node)
+    def insert_tail_private (node)
       if @tail.nil?
         @head = node
         @tail = node
@@ -36,6 +38,20 @@ module DLLModule
         @tail = node
       end
       @size += 1
+    end
+    
+    public
+    
+    def insert_head (*node)
+      node.each { |node_|
+        insert_head_private(node_);
+      }
+    end
+    
+    def insert_tail (*node)
+      node.each { |node_|
+        insert_tail_private(node_);
+      }
     end
     
     def extract_head
