@@ -76,6 +76,34 @@ RSpec.describe FoodGem do
     end
   end
   
+  context "Jerarquía de clases" do
+    before :each do
+      @food = Food.new("Huevo frito", [14.1, 4], [0.0, 4], [19.5, 9], "Huevos, lacteos y helados")
+    end
+    
+    it "Food sea Food" do
+      expect(@food).is_a?Food
+    end
+    it "Food sea FoodAbstract" do
+      expect(@food).is_a?FoodAbstract
+    end
+    it "Food sea Object" do
+      expect(@food).is_a?Object
+    end
+    it "Food sea BasicObject" do
+      expect(@food).is_a?BasicObject
+    end
+    it "Food no sea instancia FoodAbstract" do
+      expect(@food.instance_of?FoodAbstract).to eq(false)
+    end
+    it "Food sea instancia de Food" do
+      expect(@food).instance_of?Food
+    end
+    it "Clase Food sea clase Class" do
+      expect(Food).is_a?Class
+    end
+  end
+  
 end
 
 RSpec.describe DLLModule do
