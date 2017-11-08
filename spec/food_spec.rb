@@ -176,4 +176,22 @@ RSpec.describe DLLModule do
     end
   end
   
+  context "Creación de listas de alimentos" do
+    before :each do
+      food_array = read_data(DATA_FILENAME)
+      #node_array = []
+      #food_array.each { |food| node_array.push(Node.new(food)) }
+      #@list = node_array.select { |node| node.value.group_name == "Carnes y derivados" }
+      @list_array = []
+      @list_array.push(DLL.new(Node.new(food_array[3])))
+    end
+    
+    it "Comprobar que haya 3 objetos en la lista" do
+      expect(@list_array.count).to eq(1)
+    end
+    it "Comprobar que el elemento de la lista sea de grupo Carnes y derivados" do
+      expect(@list_array[0].head.value.group_name).to eq("Carnes y derivados ")
+    end
+  end
+  
 end

@@ -46,6 +46,9 @@ module FoodGem
   end
   
   class Food < FoodAbstract
+    
+    attr_reader :group_name
+    
     def initialize(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair, group_name)
       @group_name = group_name
       super(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair)
