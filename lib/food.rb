@@ -41,7 +41,7 @@ module FoodGem
     
     def to_s
         "Nombre: #{@name} | Proteínas: #{@protein_quantity} gramos | Glúcidos: #{@glucid_quantity} gramos | Lípidos: #{@lipid_quantity} gramos | " \
-        "Contenido Energético: #{@energetic_content} Kcal. |"
+        "Contenido Energético: #{@energetic_content} Kcal."
     end
   end
   

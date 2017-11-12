@@ -1,6 +1,6 @@
-Huevo frito 14.1 0.0 19.5 Huevos, lacteos y helado
-Leche vaca 3.3 4.8 3.2 Huevos, lacteos y helado
-Yogurt 3.8 4.9 3.8 Huevos, lacteos y helado
+Huevo frito 14.1 0.0 19.5 Huevos, lacteos y helados
+Leche vaca 3.3 4.8 3.2 Huevos, lacteos y helados
+Yogurt 3.8 4.9 3.8 Huevos, lacteos y helados
 Cerdo 21.5 0.0 6.3 Carnes y derivados
 Ternera 21.1 0.0 3.1 Carnes y derivados
 Pollo 20.6 0.0 5.6 Carnes y derivados

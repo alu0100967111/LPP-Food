@@ -6,6 +6,8 @@ module DLLModule
   
   class DLL
     
+    include Enumerable
+    
     attr_reader :size
     
     def initialize (value = nil)
@@ -95,6 +97,19 @@ module DLLModule
     
     def get_tail
       return @tail.value
+    end
+    
+    def empty?
+      return size == 0
+    end
+    
+    def each
+      current_node = @head
+      
+      while !current_node.nil? 
+        yield current_node.value
+        current_node = current_node.next
+      end
     end
     
     private

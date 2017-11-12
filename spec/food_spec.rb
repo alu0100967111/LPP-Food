@@ -68,7 +68,7 @@ RSpec.describe FoodGem do
       expect(@food_array[0].energetic_content).to eq(56.4 + 0.0 + 175.5)
     end
     it "Mostrar datos del alimento." do
-      expect(@food_array[0].to_s).to eq ("Grupo: Huevos, lacteos y helado | Nombre: Huevo frito | Proteínas: 14.1 gramos | Glúcidos: 0.0 gramos | Lípidos: 19.5 gramos | Contenido Energético: 231.9 Kcal. |")
+      expect(@food_array[0].to_s).to eq ("Grupo: Huevos, lacteos y helados | Nombre: Huevo frito | Proteínas: 14.1 gramos | Glúcidos: 0.0 gramos | Lípidos: 19.5 gramos | Contenido Energético: 231.9 Kcal.")
     end
     it "Comparar con array de resultados los valores energéticos del alimento." do
       result_array = [231.9, 61.2, 69, 142.7, 112.3, 132.8, 74.4, 225.5, 202, 897.2, 479.2, 399.2, 343.4, 314.6, 70.5, 19.8, 31.1, 54.4, 92.2];
@@ -130,6 +130,21 @@ RSpec.describe FoodGem do
 end
 
 RSpec.describe DLLModule do
+  
+  before :all do
+    @food_array = read_data(DATA_FILENAME)
+    
+    @list_array = Hash.new() #H ash de nombre de lista y lista
+    
+    @food_array.each{ |food| # Rellenamos el Hash
+      if (@list_array.has_key?(food.group_name)) # Si existe la lista con ese grupo, insertamos
+        @list_array[food.group_name].insert_tail(food)
+      else
+        @list_array[food.group_name] = DLL.new(food)
+        print food.group_name
+      end
+    }
+  end
   
   context "Instanciación de un Nodo" do
     before:all do
@@ -200,41 +215,64 @@ RSpec.describe DLLModule do
   end
   
   context "Creación de listas de alimentos" do
-    before :each do
-      @list_array = Hash.new() #Hash de nombre de lista y lista
-      
-      @food_array.each{ |food| 
-        if (@list_array.has_key?(food.group_name)) # Si existe la lista con ese grupo, insertamos
-          @list_array[food.group_name].insert_tail(food)
-        else
-          @list_array[food.group_name] = DLL.new(food)
-        end
-      }
+    describe "Comprobar que existan las 7 listas" do
+      it "Comprobar que existan elemento de la lista sea de grupo Huevos, lacteos y helados" do
+        expect(@list_array["Huevos, lacteos y helados"]).not_to be_empty
+      end
+      it "Comprobar que existan elemento de la lista sea de grupo Carnes y derivados" do
+        expect(@list_array["Carnes y derivados"]).not_to be_empty
+      end
+      it "Comprobar que existan elemento de la lista sea de grupo Pescados y mariscos" do
+        expect(@list_array["Pescados y mariscos"]).not_to be_empty
+      end
+      it "Comprobar que existan elemento de la lista sea de grupo Alimentos grasos" do
+        expect(@list_array["Alimentos grasos"]).not_to be_empty
+      end
+      it "Comprobar que existan elemento de la lista sea de grupo Alimentos ricos en carbohidratos" do
+        expect(@list_array["Alimentos ricos en carbohidratos"]).not_to be_empty
+      end
+      it "Comprobar que existan elemento de la lista sea de grupo Verduras y Hortalizas" do
+        expect(@list_array["Verduras y Hortalizas"]).not_to be_empty
+      end
+      it "Comprobar que existan elemento de la lista sea de grupo Frutas" do
+        expect(@list_array["Frutas"]).not_to be_empty
+      end
     end
-    
-    # describe "Comprobar que existan las 7 listas" do
-    #   it "Comprobar que existan elemento de la lista sea de grupo Huevos, lacteos y helado" do
-    #     expect(@list_array["Huevos, lacteos y helado"]).not_to be_empty
-    #   end
-    #   it "Comprobar que existan elemento de la lista sea de grupo Carnes y derivados" do
-    #     expect(@list_array["Carnes y derivados"]).not_to be_empty
-    #   end
-    #   it "Comprobar que existan elemento de la lista sea de grupo Pescados y mariscos" do
-    #     expect(@list_array["Pescados y mariscos"]).not_to be_empty
-    #   end
-    #   it "Comprobar que existan elemento de la lista sea de grupo Alimentos grasos" do
-    #     expect(@list_array["Alimentos grasos"]).not_to be_empty
-    #   end
-    #   it "Comprobar que existan elemento de la lista sea de grupo Alimentos ricos en carbohidratos" do
-    #     expect(@list_array["Alimentos ricos en carbohidratos"]).not_to be_empty
-    #   end
-    #   it "Comprobar que existan elemento de la lista sea de grupo Verduras y Hortalizas" do
-    #     expect(@list_array["Verduras y Hortalizas"]).not_to be_empty
-    #   end
-    #   it "Comprobar que existan elemento de la lista sea de grupo Frutas" do
-    #     expect(@list_array["Frutas"]).not_to be_empty
-    #   end
-    # end
   end
 
+  context "Enumerando la lista de alimentos" do
+    before :all do
+      @hlh_list = @list_array["Huevos, lacteos y helados"]
+      @cd_list = @list_array["Carnes y derivados"]
+      @pm_list = @list_array["Pescados y mariscos"]
+    end
+    
+    it "Usamos el método each de la lista doblemente enlazada" do
+      @hlh_list.each{ |food| expect(food.group_name).to eq ("Huevos, lacteos y helados")}
+    end
+    it "Usamos el método all de la lista doblemente enlazada" do
+      expect(@hlh_list.all?{ |food| food.group_name == "Huevos, lacteos y helados"}).to be_truthy
+    end
+    it "Usamos el método any de la lista doblemente enlazada" do
+      expect(@hlh_list.any?{ |food| food.name == "Yogurt"}).to be_truthy
+    end
+    it "Usamos el método max de la lista doblemente enlazada" do
+      expect(@hlh_list.max.name).to eq("Huevo frito")
+    end
+    it "Usamos el método min de la lista doblemente enlazada" do
+      expect(@hlh_list.min.name).to eq("Leche vaca")
+    end
+    it "Usamos el método first de la lista doblemente enlazada" do
+      expect(@hlh_list.first).to eq(@hlh_list.get_head)
+    end
+    it "Usamos el método count de la lista doblemente enlazada" do
+      expect(@hlh_list.count).to eq(3)
+    end
+    it "Usamos el método find de la lista doblemente enlazada" do
+      expect(@hlh_list.find{ |food| food.name == "Huevo frito"}).to eq(@hlh_list.get_head)
+    end
+    it "Usamos el método drop de la lista doblemente enlazada" do
+      expect(@hlh_list.drop(2)).to eq([@hlh_list.get_tail])
+    end
+  end
 end
