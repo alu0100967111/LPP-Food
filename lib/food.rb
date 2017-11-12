@@ -47,6 +47,8 @@ module FoodGem
   
   class Food < FoodAbstract
     
+    include Comparable
+    
     attr_reader :group_name
     
     def initialize(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair, group_name)
@@ -58,10 +60,10 @@ module FoodGem
       "Grupo: #{@group_name} | " + super
     end
     
-    # def <=> (food)
-    #   raise unless food
-    #   return self.energetic_content <=> food.energetic_content
-    # end
+    def <=> (food)
+      raise unless food.is_a?Food
+      return self.energetic_content <=> food.energetic_content
+    end
   end
   
   def read_data (data_filename)

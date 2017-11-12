@@ -6,6 +6,10 @@ include DLLModule
 DATA_FILENAME = "docs/data.txt"
 
 RSpec.describe FoodGem do
+  
+  before :all do
+      @food_array = read_data(DATA_FILENAME)
+    end
 
   context "Instanciación de clase Food." do
     it "Crear un objeto Alimento con un nombre y tres pares (macronutriente, contenido energético): Proteínas, glúcidos y lípidos." do
@@ -52,26 +56,24 @@ RSpec.describe FoodGem do
       expect(read_data(DATA_FILENAME)).to be_instance_of(Array)
     end
     it "Compruebo que la función read_data me devuelva el primer elemento bien leído." do
-      food_array = read_data(DATA_FILENAME)
-      expect(food_array[0].name).to eq("Huevo frito")
-      expect(food_array[0].protein_quantity).to eq(14.1)
-      expect(food_array[0].glucid_quantity).to eq(0.0)
-      expect(food_array[0].lipid_quantity).to eq(19.5)
+      expect(@food_array[0].name).to eq("Huevo frito")
+      expect(@food_array[0].protein_quantity).to eq(14.1)
+      expect(@food_array[0].glucid_quantity).to eq(0.0)
+      expect(@food_array[0].lipid_quantity).to eq(19.5)
     end
   end
   
   context "Realizar Operaciones en el alimento." do
-    food_array = read_data(DATA_FILENAME)
     it "Obtener el valor energético del alimento." do
-      expect(food_array[0].energetic_content).to eq(56.4 + 0.0 + 175.5)
+      expect(@food_array[0].energetic_content).to eq(56.4 + 0.0 + 175.5)
     end
     it "Mostrar datos del alimento." do
-      expect(food_array[0].to_s).to eq ("Grupo: Huevos, lacteos y helado | Nombre: Huevo frito | Proteínas: 14.1 gramos | Glúcidos: 0.0 gramos | Lípidos: 19.5 gramos | Contenido Energético: 231.9 Kcal. |")
+      expect(@food_array[0].to_s).to eq ("Grupo: Huevos, lacteos y helado | Nombre: Huevo frito | Proteínas: 14.1 gramos | Glúcidos: 0.0 gramos | Lípidos: 19.5 gramos | Contenido Energético: 231.9 Kcal. |")
     end
     it "Comparar con array de resultados los valores energéticos del alimento." do
       result_array = [231.9, 61.2, 69, 142.7, 112.3, 132.8, 74.4, 225.5, 202, 897.2, 479.2, 399.2, 343.4, 314.6, 70.5, 19.8, 31.1, 54.4, 92.2];
       for i in 0...(result_array.count)
-        expect(food_array[i].energetic_content.round(2)).to eq(result_array[i]) # Redondeamos a 2!
+        expect(@food_array[i].energetic_content.round(2)).to eq(result_array[i]) # Redondeamos a 2!
       end
     end
   end
@@ -104,9 +106,26 @@ RSpec.describe FoodGem do
     end
   end
   
-  # context "Comparando alimentos" do
+  context "Comparando alimentos" do
+    before :all do
+      @food_1 = @food_array[0] # Huevo frito
+      @food_2 = @food_array[1] # Leche vaca
+      @food_3 = @food_array[2] # Yogurt
+    end
     
-  # end
+    it "Comprobar que huevo frito es mayor que Leche de vaca" do
+      expect(@food_1).to be > @food_2
+    end
+    it "Comprobar que leche de vaca es menor que Yogurt" do
+      expect(@food_2).to be < @food_3
+    end
+    it "Comprobar que leche de vaca es igual que leche de vaca" do
+      expect(@food_2).to eq(@food_2)
+    end
+    it "Comprobar que Yogurt está entre Huevo fito y Leche de vaca" do
+      expect(@food_3).to be_between(@food_2, @food_1).exclusive
+    end
+  end
   
 end
 
@@ -182,11 +201,9 @@ RSpec.describe DLLModule do
   
   context "Creación de listas de alimentos" do
     before :each do
-      food_array = read_data(DATA_FILENAME)
-      
       @list_array = Hash.new() #Hash de nombre de lista y lista
       
-      food_array.each{ |food| 
+      @food_array.each{ |food| 
         if (@list_array.has_key?(food.group_name)) # Si existe la lista con ese grupo, insertamos
           @list_array[food.group_name].insert_tail(food)
         else
@@ -219,5 +236,5 @@ RSpec.describe DLLModule do
     #   end
     # end
   end
-  
+
 end
