@@ -55,8 +55,13 @@ module FoodGem
     end
     
     def to_s
-      "Grupo: #{@group_name}| " + super
+      "Grupo: #{@group_name} | " + super
     end
+    
+    # def <=> (food)
+    #   raise unless food
+    #   return self.energetic_content <=> food.energetic_content
+    # end
   end
   
   def read_data (data_filename)
@@ -84,7 +89,7 @@ module FoodGem
         data_line = data_line[1..-1] # Quito el primer elemento
       end
       
-      food_array.push(Food.new(name[0..-2], protein, glucid, lipid, group_name)) #Quito último espacio a nombre
+      food_array.push(Food.new(name[0..-2], protein, glucid, lipid, group_name[0..-2])) # Quito último espacio a nombre y grupo
     }
     
     return food_array

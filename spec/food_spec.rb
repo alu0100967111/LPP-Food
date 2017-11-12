@@ -104,6 +104,10 @@ RSpec.describe FoodGem do
     end
   end
   
+  # context "Comparando alimentos" do
+    
+  # end
+  
 end
 
 RSpec.describe DLLModule do
@@ -136,62 +140,84 @@ RSpec.describe DLLModule do
   
   context "Instanciación de una Lista Doblemente Enlazada" do
     before:all do
-      @node_1 = Node.new(3)
-      @node_2 = Node.new(4)
-      @node_3 = Node.new(5)
-      
-      @list = DLL.new(@node_2)
+      @list = DLL.new(4) # Lista final deseada: 0-> 1 -> 2 -> 3 -> 4 -> 5
     end
     
     it "Crear una nueva lista vacía" do
-      list = DLL.new()
+      DLL.new()
     end
     it "Crear una nueva lista con un sólo nodo" do
-      list = DLL.new(@node_2)
+      DLL.new(4)
     end
     it "Comprobamos que exista cabeza" do
-      expect(@list.head.value).to eq(4)
+      expect(@list.get_head).to eq(4)
     end
     it "Comprobamos que exista cola" do
-      expect(@list.tail.value).to eq(4)
+      expect(@list.get_tail).to eq(4)
     end
     it "Insertar un nuevo nodo en la lista por el frente" do
-      @list.insert_head(@node_1)
+      @list.insert_head(3)
     end
     it "Insertar un nuevo nodo en la lista por la cola" do
-      @list.insert_tail(@node_3)
+      @list.insert_tail(5)
     end
-    it "Comprobamos que se puedan insertar varios elementos en la lista" do
+    it "Comprobamos que se han insertado varios elementos en la lista" do
       expect(@list.size).to eq(3)
     end
+    it "Comprobamos que se puedan insertar varios elementos de una vezen la lista" do
+      @list.insert_head(2, 1, 0)
+      expect(@list.size).to eq(6)
+    end
     it "Extraer el primer elemento de la lista" do
-      expect(@list.extract_head.value).to eq(3)
+      expect(@list.extract_head).to eq(0)
     end
     it "Extraer último elemento de la lista" do
-      expect(@list.extract_tail.value).to eq(5)
+      expect(@list.extract_tail).to eq(5)
     end
     it "Eliminar un elemento con un valor elegido de la lista" do
       @list.delete(4)
-      expect(@list.size).to eq(0)
+      expect(@list.size).to eq(3)
     end
   end
   
   context "Creación de listas de alimentos" do
     before :each do
       food_array = read_data(DATA_FILENAME)
-      #node_array = []
-      #food_array.each { |food| node_array.push(Node.new(food)) }
-      #@list = node_array.select { |node| node.value.group_name == "Carnes y derivados" }
-      @list_array = []
-      @list_array.push(DLL.new(Node.new(food_array[3])))
+      
+      @list_array = Hash.new() #Hash de nombre de lista y lista
+      
+      food_array.each{ |food| 
+        if (@list_array.has_key?(food.group_name)) # Si existe la lista con ese grupo, insertamos
+          @list_array[food.group_name].insert_tail(food)
+        else
+          @list_array[food.group_name] = DLL.new(food)
+        end
+      }
     end
     
-    it "Comprobar que haya 3 objetos en la lista" do
-      expect(@list_array.count).to eq(1)
-    end
-    it "Comprobar que el elemento de la lista sea de grupo Carnes y derivados" do
-      expect(@list_array[0].head.value.group_name).to eq("Carnes y derivados ")
-    end
+    # describe "Comprobar que existan las 7 listas" do
+    #   it "Comprobar que existan elemento de la lista sea de grupo Huevos, lacteos y helado" do
+    #     expect(@list_array["Huevos, lacteos y helado"]).not_to be_empty
+    #   end
+    #   it "Comprobar que existan elemento de la lista sea de grupo Carnes y derivados" do
+    #     expect(@list_array["Carnes y derivados"]).not_to be_empty
+    #   end
+    #   it "Comprobar que existan elemento de la lista sea de grupo Pescados y mariscos" do
+    #     expect(@list_array["Pescados y mariscos"]).not_to be_empty
+    #   end
+    #   it "Comprobar que existan elemento de la lista sea de grupo Alimentos grasos" do
+    #     expect(@list_array["Alimentos grasos"]).not_to be_empty
+    #   end
+    #   it "Comprobar que existan elemento de la lista sea de grupo Alimentos ricos en carbohidratos" do
+    #     expect(@list_array["Alimentos ricos en carbohidratos"]).not_to be_empty
+    #   end
+    #   it "Comprobar que existan elemento de la lista sea de grupo Verduras y Hortalizas" do
+    #     expect(@list_array["Verduras y Hortalizas"]).not_to be_empty
+    #   end
+    #   it "Comprobar que existan elemento de la lista sea de grupo Frutas" do
+    #     expect(@list_array["Frutas"]).not_to be_empty
+    #   end
+    # end
   end
   
 end

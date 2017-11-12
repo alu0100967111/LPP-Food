@@ -6,12 +6,95 @@ module DLLModule
   
   class DLL
     
-    attr_reader :head, :tail, :size
+    attr_reader :size
     
-    def initialize (node = nil)
+    def initialize (value = nil)
+      node = Node.new(value)
+      
       @head = node
       @tail = node
       @size = (node.nil?) ? 0 : 1
+    end
+  
+    public
+    
+    def insert_head (*value_array)
+      value_array.each { |value|
+        node = Node.new(value)
+        insert_head_private(node);
+      }
+    end
+    
+    def insert_tail (*value_array)
+      value_array.each { |value|
+        node = Node.new(value)
+        insert_tail_private(node);
+      }
+    end
+    
+    def extract_head
+      if @head.nil?
+        return nil
+      else
+        @size -= 1
+        
+        node_to_return = @head
+        
+        @head = @head.next
+        @head.prev = nil
+        
+        node_to_return.next = nil
+        return node_to_return.value
+      end
+    end
+    
+    def extract_tail
+      if @tail.nil?
+        return nil
+      else
+        @size -= 1
+        
+        node_to_return = @tail
+        
+        @tail = @tail.prev
+        @tail.next = nil
+        
+        node_to_return.prev = nil
+        return node_to_return.value
+      end
+    end
+    
+    def delete (value)
+      current_node = @head
+      
+      while !current_node.nil?
+        if (current_node.value == value)
+          if (@size == 1) 
+            @head = nil
+            @tail = nil
+            current_node = nil
+          else
+            if current_node != @head
+              (current_node.prev).next = current_node.next
+            end
+            if current_node != @tail
+              (current_node.next).prev = current_node.prev
+            end
+            current_node = nil
+          end
+          @size -= 1
+        else
+          current_node = current_node.next
+        end
+      end
+    end
+    
+    def get_head
+      return @head.value
+    end
+    
+    def get_tail
+      return @tail.value
     end
     
     private
@@ -38,74 +121,6 @@ module DLLModule
         @tail = node
       end
       @size += 1
-    end
-    
-    public
-    
-    def insert_head (*node)
-      node.each { |node_|
-        insert_head_private(node_);
-      }
-    end
-    
-    def insert_tail (*node)
-      node.each { |node_|
-        insert_tail_private(node_);
-      }
-    end
-    
-    def extract_head
-      if @head.nil?
-        return nil
-      else
-        @size -= 1
-        
-        node_to_return = @head
-        
-        @head = @head.next
-        @head.prev = nil
-        
-        node_to_return.next = nil
-        return node_to_return
-      end
-    end
-    
-    def extract_tail
-      if @tail.nil?
-        return nil
-      else
-        @size -= 1
-        
-        node_to_return = @tail
-        
-        @tail = @tail.prev
-        @tail.next = nil
-        
-        node_to_return.prev = nil
-        return node_to_return
-      end
-    end
-    
-    def delete (value)
-      current_node = @head
-      
-      while !current_node.nil?
-        if (current_node.value == value)
-          if (@size == 1) 
-            @head = nil
-            @tail = nil
-            current_node = nil
-          else
-            puts "size = #{size}"
-            (current_node.prev).next = current_node.next
-            (current_node.next).prev = current_node.prev
-            current_node = nil
-          end
-          @size -= 1
-        else
-          current_node = current_node.next
-        end
-      end
     end
     
   end
