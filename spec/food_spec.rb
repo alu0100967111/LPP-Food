@@ -3,7 +3,7 @@ require "spec_helper"
 include FoodGem
 include DLLModule
 
-DATA_FILENAME = "doc/data.txt"
+DATA_FILENAME = "docs/data.txt"
 
 RSpec.describe FoodGem do
   
@@ -141,7 +141,6 @@ RSpec.describe DLLModule do
         @list_array[food.group_name].insert_tail(food)
       else
         @list_array[food.group_name] = DLL.new(food)
-        print food.group_name
       end
     }
   end
