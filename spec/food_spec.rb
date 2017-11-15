@@ -3,7 +3,7 @@ require "spec_helper"
 include FoodGem
 include DLLModule
 
-DATA_FILENAME = "docs/data.txt"
+DATA_FILENAME = "doc/data.txt"
 
 RSpec.describe FoodGem do
   
