@@ -1,15 +1,25 @@
 # Double Linked List Class
 
+# Class Doubly Linked List
 module DLLModule
   
+  # Struct Node for Doubly Linked List
   Node = Struct.new(:value, :next, :prev)
   
+  # Class Doubly Linked List
   class DLL
     
+    # Including Enumerable Module
     include Enumerable
     
+    # @attr_reader size [int] size of the doubly linked list
     attr_reader :size
     
+    # Constructor of DLL
+    # @param value of Node
+    # @param head [Node] Head of the DLL
+    # @param tail [Node] Tail of the DLL
+    # @param size [int] size of the doubly linked list
     def initialize (value = nil)
       node = Node.new(value)
       
@@ -20,6 +30,8 @@ module DLLModule
   
     public
     
+    # Insert element in DLL head
+    # @param *value_array[array] set of values
     def insert_head (*value_array)
       value_array.each { |value|
         node = Node.new(value)
@@ -27,6 +39,8 @@ module DLLModule
       }
     end
     
+    # Insert element in DLL tail
+    # @param *value_array[array] set of values
     def insert_tail (*value_array)
       value_array.each { |value|
         node = Node.new(value)
@@ -34,6 +48,8 @@ module DLLModule
       }
     end
     
+    # Extract element in DLL head
+    # @return [Node] value of the node that was in the head
     def extract_head
       if @head.nil?
         return nil
@@ -50,6 +66,8 @@ module DLLModule
       end
     end
     
+    # Extract element in DLL tail
+    # @return [Node] value of the node that was in the tail
     def extract_tail
       if @tail.nil?
         return nil
@@ -66,6 +84,7 @@ module DLLModule
       end
     end
     
+    # Delete an specific element in DLL head
     def delete (value)
       current_node = @head
       
@@ -91,18 +110,24 @@ module DLLModule
       end
     end
     
+    # Return head value
+    # @return [head(#value)]
     def get_head
       return @head.value
     end
     
+    # Return tail value
+    # @return [tail(#value)]
     def get_tail
       return @tail.value
     end
     
+    # Return if DLL is empty
     def empty?
       return size == 0
     end
     
+    # Essential method for Enumerable
     def each
       current_node = @head
       
