@@ -81,17 +81,26 @@ class Food < FoodAbstract
     @group_name = group_name
     super(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair)
     
-    @aibc_food_array = []
-    @aibc_glucose_array = [] 
+    @aibc_food_array = [] # The AIBC of this food for each person
+    @aibc_glucose_array = [] # The AIBC of glucose for each person
+    @ig_array = [] # The IG of this food for each person
     
-    (1..gluc_sample_pair_array.size).each { |person_array|
-      @aibc_food_array.push(calculate_aibc(person_array[0]))
-      @aibc_glucose_array.push(calculate_aibc(person_array[1]))
+    gluc_sample_pair_array.each { |person_array|
+      @aibc_food_array.push(calculate_aibc(person_array[0])) # First is the samples of this food for a person
+      @aibc_glucose_array.push(calculate_aibc(person_array[1])) # First is the samples of glucose for a person
     }
   end
   
+  private
+  
   def calculate_aibc(sample_array)
-    
+    (1...sample_array.size).map{|i| ((sample_array[i] + sample_array[i-1] - 2*sample_array[0]) / 2) * 5}.reduce(:+)
+  end
+  
+  public
+  
+  def get_aibc_of_person(person_number)
+    return @aibc_food_array[person_number-1]
   end
   
   # Return string with the output for the food calling the father
