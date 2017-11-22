@@ -32,6 +32,26 @@ RSpec.describe Food do
       expect(@chocolate.get_aibc_of_person(1).round(3)).to eq(7.5)
     end
   end
-
+  
+  context "Calcular IG relativo al individuo para cada alimento" do
+    it "Calcular el IG relativo al individuo 1 para la Manzana" do
+      expect(@apple.get_ig_of_person(1).round(3)).to eq(10.742)
+    end
+    it "Calcular el IG relativo al individuo 2 para la Manzana" do
+      expect(@apple.get_ig_of_person(2).round(3)).to eq(98.257)
+    end
+    it "Calcular el IG relativo al individuo 1 para la Yogurt" do
+      expect(@yogurt.get_ig_of_person(1).round(3)).to eq(8.496)
+    end
+    it "Calcular el IG relativo al individuo 2 para la Yogurt" do
+      expect(@yogurt.get_ig_of_person(2).round(3)).to eq(74.263)
+    end
+    it "Calcular el IG relativo al individuo 1 para la Chocolate" do
+      expect(@chocolate.get_ig_of_person(1).round(3)).to eq(2.93)
+    end
+    it "Calcular el IG relativo al individuo 2 para la Chocolate" do
+      expect(@chocolate.get_ig_of_person(2).round(3)).to eq(23.727)
+    end
+  end
   
 end

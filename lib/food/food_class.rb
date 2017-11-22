@@ -88,6 +88,7 @@ class Food < FoodAbstract
     gluc_sample_pair_array.each { |person_array|
       @aibc_food_array.push(calculate_aibc(person_array[0])) # First is the samples of this food for a person
       @aibc_glucose_array.push(calculate_aibc(person_array[1])) # First is the samples of glucose for a person
+      @ig_array.push(calculate_ig_for_person(@aibc_food_array.size))
     }
   end
   
@@ -97,10 +98,18 @@ class Food < FoodAbstract
     (1...sample_array.size).map{|i| ((sample_array[i] + sample_array[i-1] - 2*sample_array[0]) / 2) * 5}.reduce(:+)
   end
   
+  def calculate_ig_for_person(person_number)
+    return ((@aibc_food_array[person_number-1] / @aibc_glucose_array[person_number-1]) * 100)
+  end
+  
   public
   
   def get_aibc_of_person(person_number)
     return @aibc_food_array[person_number-1]
+  end
+  
+  def get_ig_of_person(person_number)
+    return @ig_array[person_number-1]
   end
   
   # Return string with the output for the food calling the father
