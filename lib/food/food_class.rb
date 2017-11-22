@@ -112,6 +112,10 @@ class Food < FoodAbstract
     return @ig_array[person_number-1]
   end
   
+  def get_ig
+    return (@ig_array.reduce(:+) / @ig_array.size)
+  end
+  
   # Return string with the output for the food calling the father
   # @return [String] output of food
   def to_s

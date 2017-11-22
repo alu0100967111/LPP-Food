@@ -54,4 +54,16 @@ RSpec.describe Food do
     end
   end
   
+  context "Calcular IG total de cada alimento" do
+    it "Calcular el IG total para la Manzana" do
+      expect(@apple.get_ig.round(3)).to eq(54.5)
+    end
+    it "Calcular el IG total para la Yogurt" do
+      expect(@yogurt.get_ig.round(3)).to eq(41.379)
+    end
+    it "Calcular el IG total para la Chocolate" do
+      expect(@chocolate.get_ig.round(3)).to eq(13.328)
+    end
+  end
+  
 end
