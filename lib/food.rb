@@ -12,7 +12,7 @@ module FoodGem
     data_line_array = data_file.collect! { |data_array| data_array.split(" ") } # Cambio las líneas a arrays
     
     # Hash with (name of the food, sample array for all the persons to that foods)
-    sample_people_hash = Hash.new
+    sample_people_hash = Hash.new([])
     person_number = 1
     line_counter = 0
     
@@ -28,7 +28,7 @@ module FoodGem
         food_name = data_line[0].capitalize
         sample_person_array = data_line[1..-1].collect { |data| data.to_f } # Cambio numeros a float
 
-        if (sample_people_hash[food_name].nil?)
+        if (sample_people_hash[food_name] == [])
           if (food_name == "Glucosa")
             sample_people_hash.each_key { |name| sample_people_hash[name][person_number-2].push(sample_person_array) }
           else

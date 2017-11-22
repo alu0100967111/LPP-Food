@@ -77,7 +77,7 @@ class Food < FoodAbstract
   # @param glucid_energy_pair [pair] pair of glucid number and energy
   # @param lipid_energy_pair [pair] pair of lipid number and energy
   # @param group_name [String] the name for the food group.
-  def initialize(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair, group_name, gluc_sample_pair_array)
+  def initialize(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair, group_name, gluc_sample_pair_array = [])
     @group_name = group_name
     super(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair)
     

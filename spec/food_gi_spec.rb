@@ -10,9 +10,13 @@ RSpec.describe Food do
   
   before :all do
     @food_array = read_data(FOOD_DATA_FILENAME, SAMPLES_DATA_FILENAME)
-    @apple = @food_array[0]
-    @yogurt = @food_array[1]
-    @chocolate = @food_array[2]
+    
+    @food_array.each { |food|
+      @apple = food if (food.name == "Manzana")
+      @yogurt = food if (food.name == "Yogurt")
+      @chocolate = food if (food.name == "Chocolate")
+    }
+    
   end
   
   context "Calcular AIBC para cada alimento" do
