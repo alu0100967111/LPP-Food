@@ -53,10 +53,13 @@ module FoodGem
   # Method to read data by file
   # @params data_filename [String] filename of the data
   # @return [Array] Return array of food
-  def read_data (data_filename, samples_data_filename)
+  def read_data (data_filename, samples_data_filename = "")
     data_string = File.open(data_filename).read.split("\n") # Divido el fichero en string de lineas
     food_array = []
-    sample_people_hash = read_samples_data(samples_data_filename)
+    
+    if (samples_data_filename != "")
+      sample_people_hash = read_samples_data(samples_data_filename)
+    end
   
     data_string.each { |data_line|
       data_line = data_line.split(" ") # La divido en espacios
@@ -86,6 +89,6 @@ module FoodGem
     }
     
     return food_array
-  end    
+  end   
   
 end
