@@ -1,7 +1,11 @@
+require 'coveralls'
+Coveralls.wear!
+
 require "bundler/setup"
 require "food"
 require 'benchmark'
 require 'benchmark/ips'
+
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -13,4 +17,5 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+  
 end

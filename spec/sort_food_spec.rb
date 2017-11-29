@@ -66,6 +66,8 @@ RSpec.describe Food do
     
     it "Benchmark con más información:" do
       Benchmark.ips do |x|
+        x.config(:time => 3, :warmup => 2)
+         
         x.report("Bubble Sort Imperativo: ") { @food_array.bubble_sort_imp() }
         x.report("Bubble Sort Declarativo: ") { @food_array.bubble_sort() }
         x.report("Merge Sort Imperativo: ") { @food_array.merge_sort_imp() }
