@@ -1,6 +1,7 @@
 require "food/version"
 require "food/food_class"
 require "food/dll"
+require "food/sort"
 
 # Root Module for the Gem
 # @author Angel Igareta (alu0100967111@ull.edu.es)
@@ -84,11 +85,16 @@ module FoodGem
         data_line = data_line[1..-1] # Quito el primer elemento
       end
       
-      food = Food.new(food_name, protein, glucid, lipid, group_name[0..-2], sample_people_hash[food_name])
-      food_array.push(food) # Quito último espacio a nombre y grupo
+      if (samples_data_filename != "")
+        food = Food.new(food_name, protein, glucid, lipid, group_name[0..-2], sample_people_hash[food_name])
+      else
+        food = Food.new(food_name, protein, glucid, lipid, group_name[0..-2])
+      end
+      
+      food_array.push(food)
     }
     
     return food_array
-  end   
+  end
   
 end

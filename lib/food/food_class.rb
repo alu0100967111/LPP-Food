@@ -42,7 +42,7 @@ class FoodAbstract
     @pair_macronutrient_energy.push([glucid_energy_pair[0], glucid_energy_pair[1]])
     @pair_macronutrient_energy.push([lipid_energy_pair[0], lipid_energy_pair[1]])
     
-    @energetic_content = calculate_energetic_content
+    @energetic_content = calculate_energetic_content.round(3)
   end
   
   # Calculates the energetic content for the food

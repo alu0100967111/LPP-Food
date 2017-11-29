@@ -1,5 +1,7 @@
 require "bundler/setup"
 require "food"
+require 'benchmark'
+require 'benchmark/ips'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
