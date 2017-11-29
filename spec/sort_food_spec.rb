@@ -46,6 +46,29 @@ RSpec.describe Food do
     end
   end
   
-
+  context "Benchmarks" do
+    before :all do
+      @food_array = read_data(FOOD_DATA_FILENAME, SAMPLES_DATA_FILENAME)
+    end
+    
+    it "Benchmark normal" do
+      Benchmark.bm(10) do |x|
+        x.report("Bubble Sort con For: ") { @food_array.bubble_sort_for() }
+        x.report("Bubble Sort con Each: ") { @food_array.bubble_sort_each() }
+        x.report("Merge Sort: ") { @food_array.merge_sort() }
+        x.report("Sort con Sort: ") { @food_array.sort }
+      end
+    end
+    
+    it "Benchmark con más información:" do
+      Benchmark.ips do |x|
+        x.report("Sort con For: ") { @food_array.bubble_sort_for() }
+        x.report("Sort con Each: ") { @food_array.bubble_sort_each() }
+        x.report("Sort con Sort: ") { @food_array.sort }
+        
+        x.compare!
+      end
+    end
+  end
   
 end
