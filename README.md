@@ -34,7 +34,7 @@ por glucidos o proteínas. Las vitaminas y los minerales, así como los oligoele
 se considera que no aportan calorías. 
 
     Por ejemplo, un alimento que contenga 10 g de proteína, 20 g
-    de glucidos y 9 g de grasa nos proporcionaría 201 Kcal: 10 × 4 + 20 × 4 + 9 × 9 = 201Kcal.
+    de glucidos y 9 g de grasa nos proporcionaría 201 Kcal: 10 × 4 + 20 × 4 + 9 × 9 = 201Kcal
 
 ---
 ## Requisitos
