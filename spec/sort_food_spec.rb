@@ -64,17 +64,17 @@ RSpec.describe Food do
       end
     end
     
-    it "Benchmark con más información:" do
-      Benchmark.ips do |x|
-        x.config(:time => 3, :warmup => 2)
+    # it "Benchmark con más información:" do
+    #   Benchmark.ips do |x|
+    #     x.config(:time => 3, :warmup => 2)
          
-        x.report("Bubble Sort Imperativo: ") { @food_array.bubble_sort_imp() }
-        x.report("Bubble Sort Declarativo: ") { @food_array.bubble_sort() }
-        x.report("Merge Sort Imperativo: ") { @food_array.merge_sort_imp() }
-        x.report("Merge Sort Declarativo: ") { @food_array.merge_sort() }
-        x.report("Sort con Sort: ") { @food_array.sort }
-      end
-    end
+    #     x.report("Bubble Sort Imperativo: ") { @food_array.bubble_sort_imp() }
+    #     x.report("Bubble Sort Declarativo: ") { @food_array.bubble_sort() }
+    #     x.report("Merge Sort Imperativo: ") { @food_array.merge_sort_imp() }
+    #     x.report("Merge Sort Declarativo: ") { @food_array.merge_sort() }
+    #     x.report("Sort con Sort: ") { @food_array.sort }
+    #   end
+    # end
   end
   
 end
