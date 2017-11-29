@@ -35,13 +35,16 @@ RSpec.describe Food do
         puts "\n"
       }
     end
-    it "Ordenar elementos con el método personalizado bubble sort usando for." do
-      expect(@food_array.sort).to eq(@food_array.bubble_sort_for())
+    it "Ordenar elementos con el método personalizado bubble sort imperativo." do
+      expect(@food_array.sort).to eq(@food_array.bubble_sort_imp())
     end
-    it "Ordenar elementos con el método personalizado bubble sort usando each." do
-      expect(@food_array.sort).to eq(@food_array.bubble_sort_each())
+    it "Ordenar elementos con el método personalizado bubble sort declarativo." do
+      expect(@food_array.sort).to eq(@food_array.bubble_sort())
     end
-    it "Ordenar elementos con el método personalizado merge sort." do
+    it "Ordenar elementos con el método personalizado merge sort imperativo." do
+      expect(@food_array.sort).to eq(@food_array.merge_sort_imp())
+    end
+    it "Ordenar elementos con el método personalizado merge sort declarativo." do
       expect(@food_array.sort).to eq(@food_array.merge_sort())
     end
   end
@@ -53,20 +56,21 @@ RSpec.describe Food do
     
     it "Benchmark normal" do
       Benchmark.bm(10) do |x|
-        x.report("Bubble Sort con For: ") { @food_array.bubble_sort_for() }
-        x.report("Bubble Sort con Each: ") { @food_array.bubble_sort_each() }
-        x.report("Merge Sort: ") { @food_array.merge_sort() }
+        x.report("Bubble Sort Imperativo: ") { @food_array.bubble_sort_imp() }
+        x.report("Bubble Sort Declarativo: ") { @food_array.bubble_sort() }
+        x.report("Merge Sort Imperativo: ") { @food_array.merge_sort_imp() }
+        x.report("Merge Sort Declarativo: ") { @food_array.merge_sort() }
         x.report("Sort con Sort: ") { @food_array.sort }
       end
     end
     
     it "Benchmark con más información:" do
       Benchmark.ips do |x|
-        x.report("Sort con For: ") { @food_array.bubble_sort_for() }
-        x.report("Sort con Each: ") { @food_array.bubble_sort_each() }
+        x.report("Bubble Sort Imperativo: ") { @food_array.bubble_sort_imp() }
+        x.report("Bubble Sort Declarativo: ") { @food_array.bubble_sort() }
+        x.report("Merge Sort Imperativo: ") { @food_array.merge_sort_imp() }
+        x.report("Merge Sort Declarativo: ") { @food_array.merge_sort() }
         x.report("Sort con Sort: ") { @food_array.sort }
-        
-        x.compare!
       end
     end
   end
