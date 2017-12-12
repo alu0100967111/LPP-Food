@@ -3,8 +3,8 @@ require "spec_helper"
 include FoodGem
 include DLLModule
 
-FOOD_DATA_FILENAME = "docs/input/food-data.txt"
-SAMPLES_DATA_FILENAME = "docs/input/samples-data.txt"
+FOOD_DATA_FILENAME = "input/food-data.txt"
+SAMPLES_DATA_FILENAME = "input/samples-data.txt"
 
 RSpec.describe Comparable do
   
@@ -14,22 +14,22 @@ RSpec.describe Comparable do
   
   context "Comparando alimentos" do
     before :all do
-      @food_1 = @food_array[0] # Huevo frito
+      @food_1 = @food_array[0] # Huevo frito 
       @food_2 = @food_array[1] # Leche vaca
       @food_3 = @food_array[2] # Yogurt
     end
     
     it "Comprobar que huevo frito es mayor que Leche de vaca" do
-      expect(@food_1).to be > @food_2
+      expect(@food_2).to be > @food_1
     end
     it "Comprobar que leche de vaca es menor que Yogurt" do
-      expect(@food_2).to be < @food_3
+      expect(@food_1).to be < @food_3
     end
     it "Comprobar que leche de vaca es igual que leche de vaca" do
-      expect(@food_2).to eq(@food_2)
+      expect(@food_1).to eq(@food_1)
     end
-    it "Comprobar que Yogurt está entre Huevo fito y Leche de vaca" do
-      expect(@food_3).to be_between(@food_2, @food_1).exclusive
+    it "Comprobar que Leche de vaca está entre Huevo frito y Yogurt" do
+      expect(@food_2).to be_between(@food_1, @food_3).exclusive
     end
   end
   
@@ -68,10 +68,10 @@ RSpec.describe Enumerable do
       expect(@hlh_list.any?{ |food| food.name == "Yogurt"}).to be_truthy
     end
     it "Usamos el método max de la lista doblemente enlazada" do
-      expect(@hlh_list.max.name).to eq("Huevo frito")
+      expect(@hlh_list.max.name).to eq("Yogurt")
     end
     it "Usamos el método min de la lista doblemente enlazada" do
-      expect(@hlh_list.min.name).to eq("Leche vaca")
+      expect(@hlh_list.min.name).to eq("Huevo frito")
     end
     it "Usamos el método first de la lista doblemente enlazada" do
       expect(@hlh_list.first).to eq(@hlh_list.get_head)

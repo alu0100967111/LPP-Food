@@ -3,8 +3,8 @@ require "spec_helper"
 include FoodGem
 include DLLModule
 
-FOOD_DATA_FILENAME = "docs/input/food-data.txt"
-SAMPLES_DATA_FILENAME = "docs/input/samples-data.txt"
+FOOD_DATA_FILENAME = "input/food-data.txt"
+SAMPLES_DATA_FILENAME = "input/samples-data.txt"
 
 RSpec.describe Food do
   
@@ -27,13 +27,14 @@ RSpec.describe Food do
       expect([6,5].swap(0,1)).to eq([5,6])
     end
     it "Representación de la tabla." do
-      @hash_group_list.each { |group_name, food_group|
-        puts group_name
-        food_group.each { |food|
-          puts food
-        }
-        puts "\n"
-      }
+      # @hash_group_list.each { |group_name, food_group|
+      #   puts group_name
+      #   food_group.each { |food|
+      #     puts food
+      #   }
+      #   puts "\n"
+      # }
+      expect(@hash_group_list.count).to eq(7) # 7 grupos
     end
     it "Ordenar elementos con el método personalizado bubble sort imperativo." do
       expect(@food_array.sort).to eq(@food_array.bubble_sort_imp())

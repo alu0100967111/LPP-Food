@@ -40,5 +40,6 @@ Gem::Specification.new do |spec|
   
   spec.add_development_dependency "benchmark-ips" # Para mas info en los Benchmark
   spec.add_development_dependency "coveralls"
+  spec.add_development_dependency "terminal-table"
 
 end

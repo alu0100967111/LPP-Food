@@ -3,8 +3,8 @@ require "spec_helper"
 include FoodGem
 include DLLModule
 
-FOOD_DATA_FILENAME = "docs/input/food-data.txt"
-SAMPLES_DATA_FILENAME = "docs/input/samples-data.txt"
+FOOD_DATA_FILENAME = "input/food-data.txt"
+SAMPLES_DATA_FILENAME = "input/samples-data.txt"
 
 RSpec.describe DLLModule do
   
@@ -133,10 +133,10 @@ RSpec.describe DLLModule do
       expect(@hlh_list.any?{ |food| food.name == "Yogurt"}).to be_truthy
     end
     it "Usamos el método max de la lista doblemente enlazada" do
-      expect(@hlh_list.max.name).to eq("Huevo frito")
+      expect(@hlh_list.max.name).to eq("Yogurt")
     end
     it "Usamos el método min de la lista doblemente enlazada" do
-      expect(@hlh_list.min.name).to eq("Leche vaca")
+      expect(@hlh_list.min.name).to eq("Huevo frito")
     end
     it "Usamos el método first de la lista doblemente enlazada" do
       expect(@hlh_list.first).to eq(@hlh_list.get_head)

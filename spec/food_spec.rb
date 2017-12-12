@@ -3,8 +3,8 @@ require "spec_helper"
 include FoodGem
 include DLLModule
 
-FOOD_DATA_FILENAME = "docs/input/food-data.txt"
-SAMPLES_DATA_FILENAME = "docs/input/samples-data.txt"
+FOOD_DATA_FILENAME = "input/food-data.txt"
+SAMPLES_DATA_FILENAME = "input/samples-data.txt"
 
 RSpec.describe Food do
   
@@ -115,7 +115,7 @@ RSpec.describe Food do
     end
     
     it "Comprobar que huevo frito es mayor que Leche de vaca" do
-      expect(@food_1).to be > @food_2
+      expect(@food_2).to be > @food_1
     end
     it "Comprobar que leche de vaca es menor que Yogurt" do
       expect(@food_2).to be < @food_3
@@ -124,7 +124,7 @@ RSpec.describe Food do
       expect(@food_2).to eq(@food_2)
     end
     it "Comprobar que Yogurt está entre Huevo fito y Leche de vaca" do
-      expect(@food_3).to be_between(@food_2, @food_1).exclusive
+      expect(@food_2).to be_between(@food_1, @food_3).exclusive
     end
   end
   

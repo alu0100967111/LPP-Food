@@ -2,9 +2,9 @@
 # @param PROTEIN_ENERGY [int] protein energy.
 # @param GLUCID_ENERGY [int] glucid energy.
 # @param LIPID_ENERGY [int] lipid energy
-PROTEIN_ENERGY = 4
 GLUCID_ENERGY = 4
 LIPID_ENERGY = 9
+PROTEIN_ENERGY = 4
 
 # Abstract class for Food
 class FoodAbstract
@@ -48,16 +48,21 @@ class FoodAbstract
   # Calculates the energetic content for the food
   # @return [double] energetic_content
   def calculate_energetic_content
-      energetic_content = 0
-      @pair_macronutrient_energy.each{ |macronutrient, energy| energetic_content += (macronutrient * energy) }
-      return energetic_content
+    energetic_content = 0
+    @pair_macronutrient_energy.each{ |macronutrient, energy| energetic_content += (macronutrient * energy) }
+    return energetic_content
   end
   
   # Return string with the output for the food
   # @return [String] outpout of food
   def to_s
-      "Nombre: #{@name} | Proteínas: #{@protein_quantity} gramos | Glúcidos: #{@glucid_quantity} gramos | Lípidos: #{@lipid_quantity} gramos | " \
-      "Contenido Energético: #{@energetic_content} Kcal."
+    "Nombre: #{@name} | Proteínas: #{@protein_quantity} gramos | Glúcidos: #{@glucid_quantity} gramos | Lípidos: #{@lipid_quantity} gramos | " \
+    "Contenido Energético: #{@energetic_content} Kcal."
+  end
+  
+  def *(quantity)
+    @energetic_content = (@energetic_content * quantity).round(3)
+    return self
   end
   
 end
@@ -77,7 +82,7 @@ class Food < FoodAbstract
   # @param glucid_energy_pair [pair] pair of glucid number and energy
   # @param lipid_energy_pair [pair] pair of lipid number and energy
   # @param group_name [String] the name for the food group.
-  def initialize(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair, group_name, gluc_sample_pair_array = [])
+  def initialize(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair, group_name = "", gluc_sample_pair_array = [])
     @group_name = group_name
     super(name, protein_energy_pair, glucid_energy_pair, lipid_energy_pair)
     
@@ -119,14 +124,16 @@ class Food < FoodAbstract
   # Return string with the output for the food calling the father
   # @return [String] output of food
   def to_s
-    "Grupo: #{@group_name} | " + super
+    return ("Grupo: #{@group_name} | " + super) if (@group_name != "")
+    super
   end
   
   # Essential comparating for using Comparable Module
   # @return [String] Return which food is higher depending on the enrgetic content
   def <=> (food)
     raise unless food.is_a?Food
-    return self.energetic_content <=> food.energetic_content
+    # return self.energetic_content <=> food.energetic_content
+    return self.name <=> food.name
   end
 
 end

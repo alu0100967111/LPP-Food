@@ -1,0 +1,18 @@
+Lentejas con arroz, salsa de tomate, huevo y plátano a la plancha {
+    vegetal "Tomate", :porcion => "2 piezas pequeñas"
+    fruta "Plátano", :gramos => 20
+    cereal "Arroz",  :porcion => "1 taza"
+    proteina "Lentejas", :porcion => "1/2 cucharon"
+    proteina "Huevo frito", :porcion => "1 pieza"
+    aceite "Aceite de oliva", :porcion => "1/2 cucharada"
+    
+    personas 2
+}
+
+Paella a la valenciana {
+    cereal "Arroz",  :porcion => "5 taza"
+    vegetal "Tomate", :porcion => "2 piezas pequeñas"
+    aceite "Aceite de oliva", :porcion => "2 cucharadas"
+    
+    personas 5
+}
