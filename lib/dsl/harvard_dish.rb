@@ -43,6 +43,7 @@ class HarvardDishDSL
     
     rows << ['Valor Energético Total', '', '', '', '', total_energetic_content]
     
+    # Gema para tabla usada -> https://github.com/tj/terminal-table
     return Terminal::Table.new(:title => @dish_title, 
                                :headings => [' ', 'Gramos', 'Glúcidos', 'Proteínas', 'Lípidos', 'Valor Energético'], 
                                :rows => rows)
