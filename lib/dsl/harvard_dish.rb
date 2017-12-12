@@ -36,7 +36,6 @@ class HarvardDishDSL
     total_energetic_content = 0
     
     @ingredient_quantity_array.each { |ingredient_name, ingredient_quantity|
-      puts "Ingrediente: #{ingredient_name} -> #{ingredient_quantity}"
       @food = @@ingredient_database[ingredient_name] * ingredient_quantity
       rows << [@food.name, ingredient_quantity*10, @food.glucid_quantity, @food.protein_quantity, @food.lipid_quantity, @food.energetic_content]
       total_energetic_content += @food.energetic_content
