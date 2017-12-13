@@ -1,13 +1,13 @@
 # CLASS FOR HARVARDISHES
-
 INGREDIENT_DATABASE_FILENAME = "input/food-data.txt"
+INGREDIENT_DATABASE_GRAMS = 100
 
 # INGREDIENT WEIGHT 10G
-PIECE_QUANTITY = 1
+PIECE_QUANTITY = 100
 SMALL_PIECE_QUANTITY = PIECE_QUANTITY * 0.5
-MUG_QUANTITY = 24
+MUG_QUANTITY = 240
 SMALL_MUG_QUANTITY = MUG_QUANTITY * 0.5
-SPOON_QUANTITY = 15
+SPOON_QUANTITY = 150
 SMALL_SPOON_QUANTITY = SPOON_QUANTITY * 0.5
 
 class HarvardDishDSL
@@ -97,13 +97,13 @@ class HarvardDishDSL
   def transform_to_grams(portion)
     quantity = 0
     
-    if (portion =~ /pieza/)
+    if (portion =~ /piez/)
       if (portion =~ /pequeña/)
         quantity = SMALL_PIECE_QUANTITY
       else
         quantity = PIECE_QUANTITY
       end
-    elsif (portion =~ /taza/)
+    elsif (portion =~ /taz/)
       if (portion =~ /pequeña/)
         quantity = SMALL_MUG_QUANTITY
       else
@@ -111,11 +111,13 @@ class HarvardDishDSL
       end
     elsif (portion =~ /cucharon/)
       quantity = SPOON_QUANTITY
-    elsif (portion =~ /cucharada/)
+    elsif (portion =~ /cuchar/)
       quantity = SMALL_SPOON_QUANTITY
     end
+    
+    fixed_quantity = (quantity * portion.to_r).to_f / INGREDIENT_DATABASE_GRAMS
           
-    return quantity
+    return fixed_quantity
   end
   
 end
